@@ -1,81 +1,103 @@
-\chapter{Project overview}
+\chapter{General overview}
+\newpage
 \section*{Introduction}
-The approach to our work on this project is detailed in this report, which is structured around six chapters.\\
+This chapter will you a general overview about the project. We start by presenting the project and analyse the requirements.
+\addcontentsline{toc}{section}{Introduction}
+\section{Presenting the company}
+This project is built for the company VIPAY SARL. I'm one of the interns in the company and
+my mission was to build an instructor dashboard for study.tn, an online video based e-learning platform for Tunisia where students can enroll in video based courses, and learn from the best instructors, in their own pace, anywhere, at anytime and in low cost.
+\section{Presenting the project}
+Study.tn is an e-learning platform : It is a training/education approach that theoretically allows learning without the presence of a physical teacher nearby, 
+\hfill \break
+\hfill \break
+The platform consists of three spaces :
 
-The first chapter introduces the general context of the project, we will start with the presentation of the organization that welcomed us for our internship, then we will continue with a study of the existing situation and its critique. Then we will go on to the presentation of our project and we will end by the choice of the work methodology we will adopt.  \\
-
-The second chapter entitled "Requirements analysis" will represent the preliminary phase, which revolves around the analysis and specification of needs in order to formalize the functionalities of our future system and the various constraints to be respected during its implementation. 
-
-The third chapter  will be dedicated to clarify the basic notions on which our project is based, namely the presentation of the integrated management software packages.\\
-
-The fourth, fifth and sixth chapters will be dedicated to the realization of the different modules of our project. They will include the detailed design as well as the interfaces of our final increment explained by the process of their realization. 
-
-% Une section
-
-% Exemple d'une section qui porte une référence à une bibliographie
-% NB: il faut bien suivre le syntaxe pour ne pas tomber dans le cas où il y a une référence dans la table des matières.
-\section{Presentation of the host company}
-VatoSmart is an engineering and consulting start-up, specialized in research and development of IT solutions, operating in various fields of information technology and located in the Technology Pole el Ghazela since 2018.\\
-Wishing to offer a better service to its customers, VatoSmart adopts a strategic approach reflecting the spirit of commitment and determination in order to develop a relationship of trust and partnership with its customers and to be well positioned in a market in perpetual movement.   \\
-The team is strongly involved in the life of the company, and endowed with a sense of innovation and know-how, which guarantees the quality of the deliverable and the satisfaction of its customers. \\
-Since its creation, the VatoSmart team has been dedicated to supporting its clients in the implementation of information systems that are perfectly adapted to their needs, as well as consulting in both telecommunication and marketing.
 \begin{itemize}
-\item Information systems: the start-up has chosen Odoo open-source ERP for the design of optimal and efficient information systems to centralize the management of the client's different functional processes such as the administration of the organization, human resources management, invoicing, stock management and so on. 
-
-
-\item Marketing: VatoSmart accompanies its clients from the study to the implementation of digital marketing campaigns.
+  \item The Student space where students can enroll and watch courses.
+  \item The instructor space where the instructor can manage his courses, sales.
+  \item The admin space where Study.tn team can manage users and courses 
 \end{itemize}
 
-\section{Presentation of the project}
+In this project we will build a new instructor dashboard. In this dashboard the instructor can manage the courses, manage sales and communicate with students.
+\section{The existing solutions}
+\subsection{Analysis of the existing solutions}
+The current study.tn website already has its own instructor dashboard where the instructor can add, delete or edit courses. The instructor can set the general informations such as course title,
+sub-title, price, description , category and cover photo. They can add chapters and lectures. Instructors can add requirements and exam questions. They can also check their sales.
 
-
-\subsection{Project description}
-Our solution allows you to independently and efficiently manage business travel within your company. It is a Travel Order Engine allowing you to book, manage your invoices and payments, define your travel policies and rules for your employees, all in one place. With real-time reporting and tracking, you will keep control of your expenses.
-\subsection{Problematic}
-Currently, our client relies on paper files and excel sheets to coordinate and process all of their business travels.\\
-And that raises some problems from which are :
-\begin{itemize}
-\item The agents lose an insatiable amount of time just by having to go through all physical documents looking for files
-\item Calculating Per diem and other policies is done by hand and requires double-checking.
-\item Documents that are related to employees are valuable and contain personal information. These data are unfortunately scattered in archive boxes, which increases the risk of their loss and breaks the principle of securing the employee's information.
-\end{itemize}
-\subsection{Provided Solution}
-In this project we propose to develop and implement three modules:
-\begin{itemize}
-\item Configuration module: this is a parameterization module dedicated to the administrators which allows parameterizing the activity of the platform.  
-\item Employee management module: dedicated to the management of the company's departments and the employee's information as well as the hierarchy.
-\item travel order management module: this is a module that manages the travel orders' workflow.
-\end{itemize}
-
-
-
-
-
-\section{Methodological choice}
-In this section, we discuss the modeling language for the design of the
-project and the methodology for its realization.
-\subsection{Methodology}
-Methodology is the systematic, theoretical analysis of the methods applied to a field of study.\cite{Methodology}\\
-We opted for the Agile SCRUM methodology to manage our project as efficiently as possible\\
-SCRUM is based on the principles of transparency to all stakeholders along with continuous inspection and adaptation to changing conditions. These result in a methodology embracing change and promoting an environment where all members of the project team share an equal voice regarding how the application will deliver value to its users.\\
-Scrum has several advantages:\\
-- The team gets a clear visibility of the project's progress.\\
-- Requirements are prioritized according to the needs.\\
-- Large projects are divided into easily manageable sprints.\\
-    \begin{figure}[htpb]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[scale=0.65]{img/scrumLifeCycle.png}
-    \caption{The Scrum Life Cycle}
+    \includegraphics[width=150mm]{currrent_instuctor_space.jpg}
+    \caption{The current study.tn instructor dashboard}
+    \label{fig:currrent_instuctor_space}
 \end{figure}
-\subsection{Modelization}
-we have opted for the UML modeling language that
-allows the description and visualization of needs, as well as the definition of the software architecture.\\
-We present the diagrams useful for the design of the project :\\
-- Class diagram to define the structure of the application.\\
-- Use case diagram to visualize thebehavior of the application.\\
-- Sequence diagram to describe the different interactions between actors and various system components.\\
 
+\subsection{Problem of the existing solutions}
+Server-side rendering is a common method for displaying information onto the screen. It works by converting HTML files in the server into usable information for the browser. Whenever you visit a website, your browser makes a request to the server that contains the contents of the website. Once the request is done, your browser will display the rendered HTML on the screen. The current instructor dashboard uses server-side rendering with a template enging which leads to the following issues : 
+\begin{itemize}
+  \item Touching the front-end risks touching back-end as in theory you can't do a UI rebuilt without messing backend.
+  \item Full page reloads when changing routes.
+  \item Frequent server requests which The will increase the load on the server.
+  \item An overall slow page rendering as the HTML doc gets bigger.
+
+\end{itemize}
+
+\subsection{Proposed solution}
+All of the issues above can be overcomed using a front-end framework. We decided to go with react as it is the most used framework for building large scale web applications. Built by Facebook, React makes it simple to create interactive user interfaces. The framework is designed for building component based applications and with the support of backward compatibility, so you can rest assured of its longevity. React has almost 3 million users and a massive developer community. These are the advantages of using react :
+
+
+\begin{itemize}
+  \item Does not require page reloading during use.
+  \item Only load the data from the server when needed.
+  \item Fast page rendering as it only re-render the components that needs to be updated.
+\end{itemize}
+
+
+%fin code item
+\section{Project management}
+
+\subsection{Agile method}
+An Agile method is carried out in a collaborative spirit and adapt to incremental approaches. It generates high-quality products while taking into account requirement changes. It also allows
+to manage quality continuously and detect problems as soon as possible,
+thus allowing corrective actions to be taken without too many penalties in the
+costs and deadlines. For our project, we focused on a
+Agile type method and more particularly SCRUM\cite{cite0}.
+
+\subsection{Why SCRUM}
+SCRUM is a project management method that only presents qualities: 
+
+\begin{itemize}
+  \item It is mainly focused on quality, objectives, efficiency.
+  \item Minimization of bugs while allowing an excellent communication in the project through the daily Scrum meeting.
+  \item The tasks and the "reviewing" process in the project are perfectly defined which totally improves progress.
+\end{itemize}
+
+
+\vfill
+\clearpage
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=150mm]{scrum.jpg}
+    \caption{The Scrum Framework}
+    \label{fig:scrum}
+\end{figure}
+
+
+
+\subsection{UML\cite{cite1}}
+
+UML (Unified Modeling Language) is a formal language normalized in terms of
+object modeling.
+
+\subsection{Why UML}
+UML brings many advantages such as :
+\begin{itemize}
+  \item Its independence from programming languages, application and process areas, its versatility and flexibility have made him a universal language.
+  \item make the representation and understanding of object solutions easier.
+  \item Its graphic notation allows to express an object solution visually, which helps in the comparison and evaluation of solutions.
+\end{itemize}
 
 \section*{Conclusion}
-    This chapter provided an overview of the general context of our end-of-study project. First of all we presented the agency "VatoSmart" which is the host organization of our internship. Then we presented the problem we propose to solve. We continued with a study of the existing situation and its criticism which allowed us to identify the objective of our project and our motivation and we finally chose a working methodology.
-In what follows we will begin a study of requirements that will allow us to clarify some important notions.   
+Throughout this chapter, we gave a general overview about the project and we have
+presented the existing solution and the problems in it. We also introduced the company, the work required and
+the chosen methodology. The next chapter will be for the requirements analysis.

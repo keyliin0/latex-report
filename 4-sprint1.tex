@@ -1,506 +1,213 @@
-\chapter{Sprint 1}
-
+\chapter{SPRINT ONE - Manage courses}
+\newpage
 \section*{Introduction}
-In this Sprint we go through the planning, analyzing, and implementing phases of the configuration module.
-\subsubsection*{Purpose of the configuration module}
-This module is dedicated to the platform administrator. \\
-It is a parameter setting module that facilitates the internal configuration of the application, mainly by managing :\\
-\begin{itemize}
-    \item The different travel policies
-    \item The destinations and their requirements (visa and vaccines)
-    \item The administrative grades
-\end{itemize}\\
-\subsubsection*{Actors}
-There is a single actor that can access and interact with this module:
-\begin{itemize}
-    \item Admin: The platform's administrator
-\end{itemize}\\
+\addcontentsline{toc}{section}{Introduction}
+In this sprint, we will be developing the authentication system and let the instructors manage their courses.
 \section{Sprint backlog}
-The following table summarizes the tasks that we are responsible for carrying out 
-\begin{center}
-\begin{longtable}{|p{1cm}|p{6,25cm}|p{0,7cm}|p{6,25cm}|p{0,8cm}|}
-\caption{ Project backlog }
+%%%%%table
+\begin{table}[H]
+\centering
+\caption{Product backlog}
+\begin{tabular}{|p{1cm}|p{3cm}|p{6cm}|p{2cm}|}
 \hline
-\textbf{US ID} 
-&\textbf{User Story}
-&\textbf{T ID}
-&\textbf{Task}
-&\textbf{Esti- ma- tion}
-\\
+\rowcolor{brown!18}\textbf{\large{ID}} & \textbf{\large{As a}} & \textbf{\large{I want to be able to}} & \textbf{\large{Priority}} \\
 \hline
-\multirow{ 3}{*}{0}
-&\multirow{3}{*}{Storyless}
-&0.1
-&Class diagram
-&8h\\\cline{3-5}
-&
-&0.2
-&Use case diagram
-&8h\\\cline{3-5}
-&
-&0.3
-&Documenting progress
-&2h\\\cline{3-5}
+1& Instructor  & Access the instructor space & High\\\hline
+2& Instructor & Add courses  & High\\\hline
+3& Instructor & Delete my courses  & High\\\hline
+4& Instructor & Edit my courses  & High\\\hline
+
+\end{tabular}
+\end{table}
+%%%%%table
+
+\section{Modeling}
+
+%%%%%table
+\begin{table}[H]
+\centering
+\caption{add courses textual description}
+\begin{tabular}{|p{4cm}|p{10cm}|}
 \hline
-1
-&As an Administrator , Agent , Manager or User, I want to be able to log-in
-&1
-&Setup Odoo
-&8h
+\textbf{\large{Use case name}} & Add courses \\\hline
+\textbf{\large{Actors}} & Instructor \\\hline
+\textbf{\large{Preconditions}} & User logged in \\\hline
+\textbf{\large{Postconditions}} & Course created  \\\hline
+\textbf{\large{Normal flow}} & 
+\begin{itemize}
+  \item The instructor visits the instructor space.
+  \item The instructor clicks the courses tab.
+  \item The instructor clicks the add a course button.
+\end{itemize}
 \\\hline
 
+\end{tabular}
+\end{table}
+%%%%%table
 
-\multirow{ 6}{*}{8}
-&\multirow{6}{=}{As an Administrator , I want to be able to view, create, edit, delete and import new countries}
-&8.1
-&Create the «country» model
-&8h\\\cline{3-5}
-&
-&8.2
-&Create the view
-&2h\\\cline{3-5}
-&
-&8.3
-&Create security rules
-&1h\\\cline{3-5}
-&
-&8.4
-&Create the «Destinations» menu item
-&30m\\\cline{3-5}
-&
-&8.5
-&Create the «Airport» model
-&30m\\\cline{3-5}
-&
-&8.6
-&Create the «State» model
-&30m\\\cline{3-5}
-\hline
-
-
-\multirow{ 5}{*}{9}
-&\multirow{5}{=}{As an Administrator , I want to be able to view, create, edit, delete and import flight policies}
-&9.1
-&Create the «flight\_policy» model
-&8h\\\cline{3-5}
-&
-&9.2
-&Create the view
-&2h\\\cline{3-5}
-&
-&9.3
-&Create security rules
-&1h\\\cline{3-5}
-&
-&9.4
-&Create the «Policies» menu item
-&30m\\\cline{3-5}
-&
-&9.5
-&Create «flight\_class\_rules» model
-&4h\\\cline{3-5}
-\hline
-
-
-\multirow{ 3}{*}{10}
-&\multirow{3}{=}{As an Administrator , I want to be able to view, create, edit, delete and import hotel reservation policy}
-&10.1
-&Create the «hotel\_policy» model
-&8h\\\cline{3-5}
-&
-&10.2
-&Create the view
-&2h\\\cline{3-5}
-&
-&10.3
-&Create security rules
-&1h\\\cline{3-5}
-
-\hline
-\multirow{3}{*}{11}
-&\multirow{3}{=}{As an Administrator , I want to be able to view, create, edit, delete and import per diem policy}
-&11.1
-&Create the «perdiem\_policy» model
-&8h\\\cline{3-5}
-&
-&11.2
-&Create the view
-&2h\\\cline{3-5}
-&
-&11.3
-&Create security rules
-&1h\\\cline{3-5}
-\hline
-
-\multirow{ 4}{*}{12}
-&\multirow{4}{=}{As an Administrator , I want to be able to view, create, edit, delete and import visa model}
-&12.1
-&Create the «visa» model
-&8h\\\cline{3-5}
-&
-&12.2
-&Create the view
-&2h\\\cline{3-5}
-&
-&12.3
-&Create security rules
-&1h\\\cline{3-5}
-&
-&12.4
-&Create model relations
-&2h\\\cline{3-5}
-\hline
-
-
-\multirow{ 4}{*}{13}
-&\multirow{4}{=}{As an Administrator , I want to be able to view, create, edit, delete and import vaccins}
-&13.1
-&Create the «vaccine» model
-&4h\\\cline{3-5}
-&
-&13.2
-&Create the view
-&1h\\\cline{3-5}
-&
-&13.3
-&Create security rules
-&1h\\\cline{3-5}
-&
-&13.4
-&Create the «Vaccine» menu item
-&30m\\\cline{3-5}
-
-\hline
-
-14
-&As an Administrator , I want to be able to attribute vaccines to countries
-&14.1
-&Create model relation
-&2h\\
-\hline
-
-15
-&As an Administrator , I want to be able to attribute visas to countries
-&15.1
-&Create model relation
-&2h\\
-\hline
-\\\\
-
-\multirow{5}{*}{16}
-&\multirow{5}{=}{As  an  Administrator  ,  I  want  to be able to create , edit and delete administrative grades}
-&16.1
-&Create the «grade» model
-&8h\\\cline{3-5}
-&
-&16.2
-&Create the view
-&30m\\\cline{3-5}
-&
-&16.3
-&Create security rules
-&1h\\\cline{3-5}
-&
-&16.4
-&Create model relations
-&1h\\\cline{3-5}
-&
-&16.5
-&Create the «Grade» menu item
-&30m\\\cline{3-5}
-\hline
-
-\multirow{ 3}{*}{17}
-&\multirow{3}{=}{As an Administrator , I want to be to attribute administrative grades to users}
-&17.1
-&Add «Grade» field to «hr\_employee» model
-&4h\\\cline{3-5}
-&
-&17.2
-&edit «hr\_employee» security rules
-&2h\\\cline{3-5}
-&
-&17.3
-&edit «hr\_employee» view
-&1h\\\cline{3-5}
-\hline
-
-\multirow{ 3}{*}{18}
-&\multirow{3}{=}{As an Administrator , I want to be able to create , edit and delete mission types}
-&18.1
-&Create the «mission\_type» model
-&8h\\\cline{3-5}
-&
-&18.2
-&Create the view
-&2h\\\cline{3-5}
-&
-&18.3
-&Create security rules
-&1h\\\cline{3-5}
-\hline
-\end{longtable}
-\end{center}
-\section{Software Design}
-The conceptual study conducted at the beginning of an iteration allows us to evaluate the sprint in its early stages by providing a stable reference of conceptual data model and processing to identify potential scenarios. 
-    \subsection{Class diagram}
-    The following diagram represents the entities manipulated by users as
-analysis class diagram
-    \begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.5]{img/sprint1_class.png}
-        \caption{Sprint 1 class diagram}
-    \end{center}
-     \label{fig:my_label}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=142mm]{seq_create_course.png}
+    \caption{Sequence diagram of creating a course}
+    \label{fig:seq_create_course}
 \end{figure}
-    \subsection{Use case diagram}
-    The use case diagram below helps to highlight the relationships
-functional between the actors and the system under study 
-    \begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.50]{img/UseCaseDiagramSprint1.png}
-        \caption{Sprint 1 use case diagram}
-    \end{center}
-        \label{fig:my_label}
+
+
+%%%%%table
+\begin{table}[H]
+\centering
+\caption{delete courses textual description}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{\large{Use case name}} & Delete courses \\\hline
+\textbf{\large{Actors}} & Instructor \\\hline
+\textbf{\large{Preconditions}} & User logged in \\\hline
+\textbf{\large{Postconditions}} & Course created  \\\hline
+\textbf{\large{Normal flow}} & 
+\begin{itemize}
+  \item The instructor visits the instructor space.
+  \item The instructor clicks the courses tab.
+  \item The instructor clicks on the course he wants to delete.
+  \item The instructor use the delete button.
+\end{itemize}
+\\\hline
+
+\end{tabular}
+\end{table}
+%%%%%table
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=150mm]{seq_delete_course.png}
+    \caption{Sequence diagram of deleting a course}
+    \label{fig:seq_delete_course}
 \end{figure}
-  \\ In what follows, we will proceed to go in detail on some use cases  
 
+\newpage
+\vfill
 
-\subsection*{Use case «Manage countries»}
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.5]{img/sprint1_country_usecase.png}
-        \caption{«Manage countries» detailed use case diagram}
-    \end{center}
-        \label{fig:my_label}
-\end{figure} 
-    The following table addresses the use case previously illustrated by providing a textual description, post and preconditions as well as the main scenario and the nominal scenario
-    \begin{center}
-    
-\begin{longtable}{|p{4,25cm}|p{9,25cm}|}
-\caption{«Manage countries» detailed textual description}
+%%%%%table
+\begin{table}[H]
+\centering
+\caption{edit courses textual description}
+\begin{tabular}{|p{4cm}|p{10cm}|}
 \hline
-\textbf{Use Case}&Create country
-\\\hline
-\textbf{Actors}&Administrator
-\hline
-\textbf{Pre-condition}&Administrator signed in and viewing countries list
-\hline
-\textbf{Post-condition}&New country created
-\hline
-\textbf{Basic path}&
-        \begin{itemize}
-         \item[1.] The administrator clicks on the button "New"
-         \item[2.] The system displays a form to fill out
-         \item[3.] The administrator fills the form
-         \item[4.] The administrator clicks on the button "Save"
-         \item[5.] The system processes the input
-         \item[6.] The system saves the new country
-         \item[7.] The administrator is sent back to the countries list
-     \end{itemize}\\
-\hline
-\textbf{Alternative path}&
+\textbf{\large{Use case name}} & Delete courses \\\hline
+\textbf{\large{Actors}} & Instructor \\\hline
+\textbf{\large{Preconditions}} & User logged in \\\hline
+\textbf{\large{Postconditions}} & Course edited  \\\hline
+\textbf{\large{Normal flow}} & 
 \begin{itemize}
-\item 4.Duplicate or missing Data (The administrator is sent back to step 2)
+  \item The instructor visits the instructor space.
+  \item The instructor clicks the courses tab.
+  \item The instructor clicks on the course he wants to edit.
+  \item The instructor type the meta data of the course.
+  \item The instructor save the changes by using the save button.
+\end{itemize}
+\\\hline
 
-\end{itemize}\\
-\hline
-\end{longtable}
-\end{center}
+\end{tabular}
+\end{table}
+%%%%%table
 
-
-
-
-\subsection*{Use case «Manage visas»}
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.45]{img/sprint1_visa_usecase.png}
-        \caption{«Manage visas» detailed use case diagram}
-    \end{center}    
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=170mm,height=200mm]{seq_edit_course.png}
+    \caption{Sequence diagram of editing a course}
+    \label{fig:seq_edit_course}
 \end{figure}
-    In the following we will present the sequence diagram to illustrate the relationships between the actor and the different components of our use case from a temporal point of view, focusing on the chronology of the exchanges of messages.
-    \begin{figure}[H]
-     \begin{center}
-        \includegraphics[scale=0.355]{img/sprint1_visa_sequ.png}
-        \caption{«Manage visas» sequence diagram}
-    \end{center}   
-    \end{figure}
-    
-    
-    
-    
-    
-\subsection*{Use case «Manage vaccines»}
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.50]{img/sprint1_vaccine_usecase.png}
- \caption{«Manage vaccines» detailed use case diagram}
-    \end{center}   
-    \end{figure}
-      The following table addresses the use case previously illustrated by providing a textual description, post and preconditions as well as the main scenario and the nominal scenario
-    \begin{center}
-    
-\begin{longtable}{|p{4,25cm}|p{9,25cm}|}
-\caption{«Manage vaccines» detailed textual description}
-\hline
-\textbf{Use Case}&Create vaccine
-\\\hline
-\textbf{Actors}&Administrator
-\hline
-\textbf{Pre-condition}&Administrator signed in and viewing vaccines list
-\hline
-\textbf{Post-condition}&New vaccine created
-\hline
-\textbf{Basic path}&
-        \begin{enumerate}
-         \item The administrator clicks on the button "New"
-         \item The system displays a form to fill out
-         \item The administrator fills the form
-         \item The administrator clicks on the button "Save"
-         \item The system processes the input
-         \item The system saves the new vaccine
-         \item The administrator is sent back to the countries list
-     \end{enumerate}\\
-\hline
-\textbf{Alternative path}&
-\begin{itemize}
-\item 4.Duplicate or missing Data (The administrator is sent back to step 2)
 
-\end{itemize}\\
-\hline
-\end{longtable}
-\end{center}  
-    
-    
-    
-    
-    
-    
-    
-\subsection*{Use case «Manage policies»}
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.50]{img/sprint1_policy_usecase.png}
-         \caption{«Manage policies» detailed use case diagram}
-    \end{center}   
-    \end{figure}
-    
-    
-        \begin{center}
-    
-\begin{longtable}{|p{3.2cm}|p{10cm}|}
-\caption{«Manage policies» detailed textual description}
-\hline
-\textbf{Use Case}&Edit flight policy
-\\\hline
-\textbf{Actors}&Administrator
-\hline
-\textbf{Pre-condition}&Administrator signed in and flight policies list
-\hline
-\textbf{Post-condition}&Flight policy edited\\
-\hline
-\textbf{Basic path}&
-        \begin{enumerate}
-         \item The administrator clicks on the button "New"
-         \item The system displays a form to fill out
-         \item The administrator fills the form
-         \item The administrator selects at least one of each policy
-         \item The administrator clicks on the button "Save"
-         \item The system processes the input
-         \item The system saves the new vaccine
-         \item The administrator is sent back to the countries list
-     \end{enumerate}\\
-\hline
-\textbf{Alternative path}&
-\begin{itemize}
-\item 6.Duplicate or missing Data (The administrator is sent back to step 3)
-\item 4.No policy exist and the user is prompted to go to the policy creation form
-\end{itemize}\\
-\hline
-\end{longtable}
-\end{center}  
-
-
-
-
-\subsection*{Use case «Manage administrative grades»}
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[scale=0.50]{img/sprint1_grade_usecase.png}
-        \caption{«Manage administrative grades» detailed use case diagram}
-    \end{center}   
-    \end{figure}
-    
-    The following table addresses the use case previously illustrated by providing a textual description,post and preconditions as well as the main scenario and the nominal scenario
-    
-            \begin{center}
-    
-\begin{longtable}{|p{3.2cm}|p{10cm}|}
-\caption{«Manage administrative grades» detailed textual description}
-\hline
-\textbf{Use Case}&Create administrative grade
-\\\hline
-\textbf{Actors}&Administrator
-\hline
-\textbf{Pre-condition}&Administrator signed in and viewing grades list
-\hline
-\textbf{Post-condition}&New grade created
-\hline
-\textbf{Basic path}&
-        \begin{enumerate}
-         \item The administrator selects a policy
-         \item The system displays the policy information
-         \item The administrator clicks on the button "Edit"
-         \item The system displays a filled form
-         \item The administrator edits the fields
-         \item The administrator clicks on the button "Save"
-         \item The system processes the input
-         \item The system saves the new policy
-         \item The administrator is sent back to the flight policies list
-     \end{enumerate}\\
-\hline
-\textbf{Alternative path}&
-\begin{itemize}
-\item 7.Duplicate or missing Data (The administrator is sent back to step 3)
-\item 6.form not edited (System skips to step 9)
-\end{itemize}\\
-\hline
-\end{longtable}
-\end{center}  
-
-
+\vfill
+\clearpage
 
 \section{Implementation}
-This section presents some user interfaces of the module with screenshots to further clarify our work. The figures below present these interfaces, starting with the first figure which shows the authentication interface.
 
-\begin{figure}[H]
+\subsection{Access the instructor space}
+As study.tn website already has its own authentication system, the instructor only needs to log in to study.tn then visit the instructor space. Since study.tn and the instructor dashboard are both separate apps, we need to let our app know who's the logged in user in study.tn. Once the instructor tries to visit the dashboard from study.tn we send the authentication token to our dashboard in the url, we get that token, save it in the local storage and then we know who's the user accessing the dashboard with that token.
+
+\subsection{Add a course}
+When clicking on the add course button, we make a request to the server to add a new course to the database and as a response we get the created record data (course id, course name...) which is then added to the redux store state to update and re-render the courses.
+
+\subsection{Delete a course}
+When clicking on the delete course button, we send a request with the course id to the server to remove the course from the database and show the result of the response to the user accordingly. If no one is enrolled in that course we should recieve a success and remove the course from the redux store to re-render the courses list. 
+
+\begin{figure}[!ht]
     \centering
-    \includegraphics[scale=0.30]{img/c_auth.png}
-    \caption{Interface <<Authentication>>}
-    \label{fig:my_label}
+    \includegraphics[width=150mm]{courses_tab2.jpg}
+    \caption{Courses tab interface}
+    \label{fig:courses_tab2}
 \end{figure}
 
-And on the next figure, we will show the main menu of this module, this navigation bar remains accessible from all views on this module.
-\begin{figure}[H]
+\subsection{Edit course}
+Clicking on the course in the courses list will bring up a page where the instructor can edit the course and he must fill in the meta data of the course. The page consists of multiple forms each having it's own redux reducer and each form will load it's data individually.
+
+\subsubsection{Target student form}
+The instructor writes what are the requirements and prerequisites that students need to have to understand the course in the input field and click the plus button to add it, which will fire a post request to the server sending the text in the input field. When the request is running we show a loader to the user to let him know that something is happening in the background and he needs to wait. After a successful request we update the form state to add the requirement and re-render the form.
+
+\hfill \break
+\hfill \break
+The instructor can change the order of the requirements list using drag and drop. We implemented it with the help of react-sort-list library which sort the list in the front end, once it's done we make a post request to the server with the requirements new order in the body.
+\hfill \break
+\hfill \break
+We can also delete a requirement by clicking the bin icon and let the server know that we want to delete the element.
+\hfill \break
+\hfill \break
+The process is the same for what will the student learn list.
+
+\vfill
+\clearpage
+
+\begin{figure}[!ht]
     \centering
-    \includegraphics[scale=0.43]{img/c_config_menu.png}
-    \caption{Configuration module menu}
-    \label{fig:my_label}
+    \includegraphics[width=150mm]{target_student_form.jpg}
+    \caption{Target student form interface}
+    \label{fig:target_student_form}
 \end{figure}
-In this figure we will show the Countries list view, all countries are listed on this tree view and we can find our operations on the buttons above them. The administrator is the only actor able to access these views
-\begin{figure}[H]
+
+
+\subsubsection{Curriculum form}
+A course is composed of chapters, each chapter could have one or more lectures. A lecture is simply a video, but it could have a file as well.
+\hfill \break
+\hfill \break
+We can add a new chapter by clicking add a new chapter button, the browser will make a request to the server and in return we get the created chapter data which we can use to update the redux state and show the new chapter to the user. We can delete a chapter by clicking the bin icon or edit it by clicking the bin icon, let the server know then update the interface. We can also sort the chapter in the same way we did in the target form with the help of react-sort-list library.
+\hfill \break
+\hfill \break
+The same actions performed on chapters can be performed on lectures and they share the same implementation. However, We can upload a video to a lecture by selecting a video from the hard drive or recording it right away, we used uppy react library for this which scales well as it is flexible and we can choose to add more upload options in the future if we want to. The browser will then make a request to the server to get an upload url and the video id associated to the video that we are about to upload then the upload will start. As the upload process can take time, we show the user a progress bar with a percentage on it. Once it's done we make another request to let the server know that the video has been uploaded successfully and associate the video id with the lecture. Since the video is transcoding and we don't know when this process will end, we refresh the lecture with a random timer between 20 second and 40 seconds to check if the video is ready and show it to the user. The reason behind picking a random timer is to minimize the load on the server so it's less likely that many users will make a request at the same time. The process of uploading a file is as the same as the video except the transcoding phase.
+
+\begin{figure}[!ht]
     \centering
-    \includegraphics[scale=0.32]{img/c_country_list.png}
-    \caption{Countries list view}
-    \label{fig:my_label}
+    \includegraphics[width=150mm]{curriculum_form.jpg}
+    \caption{Curriculum form interface}
+    \label{fig:curriculum_form}
 \end{figure}
-In this figure we will go over the flight policy view, here we can Edit or Duplicate the policy we are viewing or we can create a new one
-\begin{figure}[H]
+
+
+\subsubsection{Landing page form}
+In the landing page form, the user types the course info (title, subtitle, description...) and clicks the save button to update the course informations.
+
+\vfill
+\clearpage
+
+\begin{figure}[!ht]
     \centering
-    \includegraphics[scale=0.32]{img/c_flight_policy.png}
-    \caption{Countries list view}
-    \label{fig:my_label}
+    \includegraphics[width=150mm]{landing_page_form.jpg}
+    \caption{Landing page form interface}
+    \label{fig:landing_page_form}
 \end{figure}
+
+
+\subsubsection{Pircing form}
+The instructor puts the price he wants in TND then clicks the save button to make a request to the server and update the price.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=150mm]{price_form.jpg}
+    \caption{Pircing form interface}
+    \label{fig:price_form}
+\end{figure}
+
+\vfill
+\clearpage
+
 \section*{Conclusion}
-In this chapter we have discussed the sprint1 of our project which concerns the design, development and implementation of a first module our project which is the configuration module . This sprint was spread over one month. At the beginning of this sprint we set objectives to be reached. We started with the elaboration of the Backlog sprint afterwards we started a design phase before starting the development. \\During the development phase there was a daily meeting of the project working committee where everyone presented what they had done the day before, what they intended to do and if they faced any obstacles.\\ We closed this chapter with a section called realization where we presented some interfaces of the first increment of our project.\\
-In what follows we will begin the second phase of the project, namely the design, development and implementation of a second module which concerns the management of Employees.
+In this chapter, we have implemented adding, deleting and editing a course which consists of multiple forms. In the next chapter we will cover the communication and sales management side of the dashboard.
